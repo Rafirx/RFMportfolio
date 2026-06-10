@@ -1,0 +1,1528 @@
+/* ==========================================================================
+   DEVELOPER PORTFOLIO - CYBER BIO-SYSTEMS DESIGN SYSTEM
+   Rafiu Moynul - Creative Systems Developer
+   ========================================================================== */
+
+/* --------------------------------------------------------------------------
+   1. Theme Variables & Reset
+   -------------------------------------------------------------------------- */
+:root {
+    /* Color Tokens */
+    --color-bg-deep: #030307;
+    --color-bg-dark: #07070f;
+    --color-bg-card: rgba(10, 10, 22, 0.45);
+    --color-bg-glass: rgba(15, 15, 30, 0.55);
+    
+    --color-neon-cyan: #00f2fe;
+    --color-neon-cyan-glow: rgba(0, 242, 254, 0.35);
+    --color-neon-magenta: #f355da;
+    --color-neon-magenta-glow: rgba(243, 85, 218, 0.35);
+    --color-neon-purple: #7000ff;
+    --color-neon-blue: #4facfe;
+
+    --color-text-primary: #f3f4f6;
+    --color-text-secondary: #9ca3af;
+    --color-text-muted: #6b7280;
+    --color-border: rgba(255, 255, 255, 0.08);
+    --color-border-glow: rgba(0, 242, 254, 0.2);
+
+    /* Typography */
+    --font-heading: 'Space Grotesk', sans-serif;
+    --font-body: 'Inter', sans-serif;
+    --font-mono: 'Fira Code', monospace;
+
+    /* Spacing & Transitions */
+    --transition-fast: 0.2s cubic-bezier(0.25, 0.8, 0.25, 1);
+    --transition-medium: 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
+    --transition-slow: 0.8s cubic-bezier(0.25, 0.8, 0.25, 1);
+    
+    --cursor-x: 0px;
+    --cursor-y: 0px;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    scrollbar-width: none; /* Firefox */
+}
+
+*::-webkit-scrollbar {
+    display: none; /* Chrome/Safari */
+}
+
+html {
+    scroll-behavior: smooth;
+    background-color: var(--color-bg-deep);
+    color: var(--color-text-primary);
+    font-family: var(--font-body);
+    overflow-x: hidden;
+}
+
+body {
+    min-height: 100vh;
+    overflow-x: hidden;
+    position: relative;
+}
+
+body.loading {
+    overflow: hidden;
+}
+
+/* --------------------------------------------------------------------------
+   2. Background Grid & Aurora Glowing Orbs
+   -------------------------------------------------------------------------- */
+.bg-matrix-grid {
+    position: fixed;
+    inset: 0;
+    background-image: 
+        linear-gradient(rgba(255, 255, 255, 0.015) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255, 255, 255, 0.015) 1px, transparent 1px);
+    background-size: 50px 50px;
+    background-position: center center;
+    pointer-events: none;
+    z-index: 1;
+}
+
+.bg-dots {
+    position: fixed;
+    inset: 0;
+    background-image: radial-gradient(rgba(255, 255, 255, 0.04) 1px, transparent 1px);
+    background-size: 25px 25px;
+    pointer-events: none;
+    z-index: 1;
+}
+
+/* Deep Cyber Aurora Glows */
+.bg-glow {
+    position: fixed;
+    width: 60vw;
+    height: 60vw;
+    border-radius: 50%;
+    filter: blur(120px);
+    opacity: 0.18;
+    pointer-events: none;
+    z-index: 0;
+    mix-blend-mode: screen;
+    animation: pulseGlow 15s infinite alternate ease-in-out;
+}
+
+.bg-glow-cyan {
+    background: radial-gradient(circle, var(--color-neon-cyan) 0%, transparent 70%);
+    top: -20%;
+    left: -10%;
+}
+
+.bg-glow-magenta {
+    background: radial-gradient(circle, var(--color-neon-magenta) 0%, transparent 70%);
+    bottom: -20%;
+    right: -10%;
+    animation-delay: -7.5s;
+}
+
+@keyframes pulseGlow {
+    0% {
+        transform: translate(0, 0) scale(1);
+    }
+    100% {
+        transform: translate(8%, 8%) scale(1.15);
+    }
+}
+
+/* --------------------------------------------------------------------------
+   3. Custom Interactive Spotlight Cursor
+   -------------------------------------------------------------------------- */
+.custom-cursor {
+    width: 8px;
+    height: 8px;
+    background-color: var(--color-neon-cyan);
+    border-radius: 50%;
+    position: fixed;
+    transform: translate(-50%, -50%);
+    pointer-events: none;
+    z-index: 9999;
+    transition: width 0.2s, height 0.2s, background-color 0.2s;
+}
+
+.custom-cursor-glow {
+    width: 40px;
+    height: 40px;
+    border: 1px solid var(--color-neon-cyan-glow);
+    border-radius: 50%;
+    position: fixed;
+    transform: translate(-50%, -50%);
+    pointer-events: none;
+    z-index: 9998;
+    transition: width 0.3s, height 0.3s, border-color 0.3s, transform 0.08s ease-out;
+    background: radial-gradient(circle, rgba(0, 242, 254, 0.03) 0%, transparent 80%);
+}
+
+/* Interactive Cursor States */
+body.hovering-clickable .custom-cursor {
+    width: 16px;
+    height: 16px;
+    background-color: var(--color-neon-magenta);
+}
+
+body.hovering-clickable .custom-cursor-glow {
+    width: 60px;
+    height: 60px;
+    border-color: var(--color-neon-magenta-glow);
+}
+
+/* Hide standard cursor on non-touch screens */
+@media (hover: hover) and (pointer: fine) {
+    body, a, button, input, textarea, .project-card, .nav-dot {
+        cursor: none !important;
+    }
+}
+
+/* --------------------------------------------------------------------------
+   4. Premium Synaptic Loader Overlay
+   -------------------------------------------------------------------------- */
+.loader-overlay {
+    position: fixed;
+    inset: 0;
+    background-color: var(--color-bg-deep);
+    z-index: 99999;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    opacity: 1;
+    transition: opacity 0.8s cubic-bezier(0.77, 0, 0.175, 1), visibility 0.8s;
+}
+
+.loader-overlay.fade-out {
+    opacity: 0;
+    visibility: hidden;
+}
+
+.loader-content {
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 25px;
+}
+
+/* DNA Loader Dot Animation */
+.loader-dna {
+    display: flex;
+    gap: 8px;
+    height: 60px;
+    align-items: center;
+}
+
+.loader-dna span {
+    width: 6px;
+    height: 20px;
+    background-color: var(--color-neon-cyan);
+    border-radius: 3px;
+    animation: loaderHelix 1.5s ease-in-out infinite;
+    animation-delay: calc(var(--i) * 0.12s);
+}
+
+.loader-dna span:nth-child(even) {
+    background-color: var(--color-neon-magenta);
+}
+
+@keyframes loaderHelix {
+    0%, 100% {
+        transform: scaleY(1);
+        filter: brightness(1);
+    }
+    50% {
+        transform: scaleY(3.5);
+        filter: brightness(1.5) drop-shadow(0 0 8px var(--color-neon-cyan-glow));
+    }
+}
+
+.loader-text {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    letter-spacing: 4px;
+    color: var(--color-text-secondary);
+    animation: textFlicker 2s infinite alternate;
+}
+
+@keyframes textFlicker {
+    0%, 100% { opacity: 0.6; }
+    50% { opacity: 1; }
+}
+
+.loader-bar-container {
+    width: 250px;
+    height: 2px;
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 1px;
+    overflow: hidden;
+    position: relative;
+}
+
+.loader-bar {
+    width: 0%;
+    height: 100%;
+    background: linear-gradient(90deg, var(--color-neon-cyan), var(--color-neon-magenta));
+    box-shadow: 0 0 10px var(--color-neon-cyan);
+    transition: width 0.1s ease-out;
+}
+
+.loader-percentage {
+    font-family: var(--font-mono);
+    font-size: 13px;
+    color: var(--color-text-primary);
+}
+
+/* --------------------------------------------------------------------------
+   5. Core Layout Container
+   -------------------------------------------------------------------------- */
+.portfolio-container {
+    position: fixed;
+    inset: 0;
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    z-index: 10;
+}
+
+.scroll-depth-spacer {
+    height: 520vh; /* Extremely deep scroll to allow nice rotation timeline */
+    pointer-events: none;
+}
+
+/* --------------------------------------------------------------------------
+   6. Left Pane: Information Hub (Dashboard)
+   -------------------------------------------------------------------------- */
+.left-pane {
+    width: 42%;
+    height: 100%;
+    border-right: 1px solid var(--color-border);
+    background: linear-gradient(to right, rgba(3, 3, 7, 0.95), rgba(7, 7, 15, 0.85));
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    z-index: 15;
+    position: relative;
+    overflow-y: auto;
+    scrollbar-width: none;
+}
+
+.left-pane-content {
+    padding: 50px 60px 40px;
+    display: flex;
+    flex-direction: column;
+    min-height: 100%;
+    gap: 40px;
+}
+
+/* Brand Header */
+.brand-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.brand-logo {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-family: var(--font-heading);
+    font-weight: 700;
+    font-size: 18px;
+    letter-spacing: 2px;
+}
+
+.logo-symbol {
+    color: var(--color-neon-cyan);
+    text-shadow: 0 0 8px var(--color-neon-cyan-glow);
+}
+
+.logo-text {
+    background: linear-gradient(135deg, var(--color-text-primary) 30%, var(--color-text-secondary));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.system-status {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-family: var(--font-mono);
+    font-size: 9px;
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid var(--color-border);
+    padding: 6px 12px;
+    border-radius: 20px;
+}
+
+.status-dot {
+    width: 5px;
+    height: 5px;
+    background-color: var(--color-neon-cyan);
+    border-radius: 50%;
+    box-shadow: 0 0 6px var(--color-neon-cyan);
+    animation: statusBlink 1.5s infinite ease-in-out;
+}
+
+@keyframes statusBlink {
+    0%, 100% { opacity: 0.3; }
+    50% { opacity: 1; }
+}
+
+.status-label {
+    color: var(--color-text-secondary);
+}
+
+.system-time {
+    color: var(--color-text-muted);
+    border-left: 1px solid rgba(255, 255, 255, 0.1);
+    padding-left: 8px;
+}
+
+/* Profile Section */
+.profile-section {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.dev-name {
+    font-family: var(--font-heading);
+    font-size: 42px;
+    font-weight: 700;
+    line-height: 1.1;
+    letter-spacing: -1px;
+}
+
+.dev-title {
+    font-family: var(--font-mono);
+    font-size: 13px;
+    letter-spacing: 2px;
+    color: var(--color-neon-cyan);
+    text-shadow: 0 0 10px rgba(0, 242, 254, 0.15);
+    text-transform: uppercase;
+}
+
+.dev-bio {
+    font-size: 14px;
+    line-height: 1.6;
+    color: var(--color-text-secondary);
+    font-weight: 300;
+}
+
+/* Quick Stats */
+.quick-stats {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 15px;
+    margin-top: 10px;
+}
+
+.stat-item {
+    background: rgba(255, 255, 255, 0.02);
+    border: 1px solid var(--color-border);
+    border-radius: 12px;
+    padding: 12px 15px;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    transition: border-color 0.3s, background 0.3s;
+}
+
+.stat-item:hover {
+    border-color: var(--color-border-glow);
+    background: rgba(0, 242, 254, 0.02);
+}
+
+.stat-val {
+    font-family: var(--font-mono);
+    font-size: 16px;
+    font-weight: 700;
+    color: var(--color-text-primary);
+}
+
+.stat-lbl {
+    font-size: 9px;
+    color: var(--color-text-muted);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+/* Navigation Matrix */
+.nav-matrix {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    border-top: 1px solid var(--color-border);
+    border-bottom: 1px solid var(--color-border);
+    padding: 20px 0;
+}
+
+.nav-item {
+    text-decoration: none;
+    font-family: var(--font-heading);
+    font-weight: 600;
+    font-size: 13px;
+    letter-spacing: 2.5px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    color: var(--color-text-muted);
+    padding: 8px 12px;
+    border-radius: 8px;
+    transition: var(--transition-fast);
+    position: relative;
+    overflow: hidden;
+}
+
+.nav-item::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 50%;
+    transform: translateY(-50%) translateX(-8px);
+    width: 4px;
+    height: 4px;
+    background-color: var(--color-neon-cyan);
+    border-radius: 50%;
+    transition: transform 0.2s ease-out;
+    box-shadow: 0 0 8px var(--color-neon-cyan);
+}
+
+.nav-item.active {
+    color: var(--color-text-primary);
+    background: rgba(255, 255, 255, 0.02);
+}
+
+.nav-item.active::before {
+    transform: translateY(-50%) translateX(0px);
+}
+
+.nav-item:hover {
+    color: var(--color-text-primary);
+    background: rgba(255, 255, 255, 0.03);
+}
+
+.nav-num {
+    font-family: var(--font-mono);
+    font-size: 10px;
+    color: var(--color-neon-cyan);
+}
+
+.nav-txt {
+    text-transform: uppercase;
+}
+
+/* --------------------------------------------------------------------------
+   7. Dynamic Decryptor Panel (Project Details)
+   -------------------------------------------------------------------------- */
+.decryptor-container,
+.skills-container,
+.contact-container {
+    background: var(--color-bg-glass);
+    border: 1px solid var(--color-border);
+    border-radius: 16px;
+    padding: 25px;
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.4);
+    position: relative;
+    transition: opacity 0.5s ease, transform 0.5s ease, border-color 0.3s;
+}
+
+.decryptor-container:hover {
+    border-color: rgba(0, 242, 254, 0.15);
+}
+
+.hide-panel {
+    display: none;
+    opacity: 0;
+    transform: translateY(15px);
+}
+
+.panel-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    padding-bottom: 15px;
+    margin-bottom: 20px;
+}
+
+.panel-tag {
+    font-family: var(--font-mono);
+    font-size: 10px;
+    letter-spacing: 2px;
+    color: var(--color-neon-cyan);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    text-shadow: 0 0 6px var(--color-neon-cyan-glow);
+}
+
+.panel-id {
+    font-family: var(--font-mono);
+    font-size: 9px;
+    color: var(--color-text-muted);
+}
+
+/* Content Transitions */
+.project-details {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+.project-details.switching {
+    opacity: 0;
+    transform: translateY(8px);
+}
+
+.proj-title {
+    font-family: var(--font-heading);
+    font-size: 26px;
+    font-weight: 700;
+    letter-spacing: 1px;
+}
+
+.proj-meta {
+    display: flex;
+    gap: 15px;
+    font-family: var(--font-mono);
+    font-size: 10px;
+}
+
+.proj-status {
+    color: var(--color-neon-magenta);
+}
+
+.proj-latency {
+    color: var(--color-text-secondary);
+}
+
+.proj-description {
+    font-size: 13.5px;
+    line-height: 1.6;
+    color: var(--color-text-secondary);
+    font-weight: 300;
+}
+
+/* Specs Grid */
+.proj-specs {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 10px;
+}
+
+.spec-card {
+    background: rgba(255, 255, 255, 0.015);
+    border: 1px solid rgba(255, 255, 255, 0.04);
+    border-radius: 8px;
+    padding: 10px;
+    text-align: center;
+}
+
+.spec-label {
+    font-size: 8px;
+    font-family: var(--font-mono);
+    color: var(--color-text-muted);
+    margin-bottom: 4px;
+    letter-spacing: 1px;
+}
+
+.spec-val {
+    font-size: 12px;
+    font-family: var(--font-mono);
+    font-weight: 600;
+    color: var(--color-text-primary);
+}
+
+/* High Tech Tabs Component */
+.proj-tabs {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    margin-top: 5px;
+}
+
+.tab-headers {
+    display: flex;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    gap: 15px;
+}
+
+.tab-btn {
+    background: none;
+    border: none;
+    color: var(--color-text-muted);
+    font-family: var(--font-heading);
+    font-weight: 600;
+    font-size: 10.5px;
+    letter-spacing: 1.5px;
+    padding-bottom: 8px;
+    position: relative;
+    transition: var(--transition-fast);
+}
+
+.tab-btn::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 0%;
+    height: 1px;
+    background-color: var(--color-neon-cyan);
+    box-shadow: 0 0 6px var(--color-neon-cyan);
+    transition: var(--transition-fast);
+}
+
+.tab-btn.active {
+    color: var(--color-text-primary);
+}
+
+.tab-btn.active::after {
+    width: 100%;
+}
+
+.tab-contents {
+    position: relative;
+    min-height: 50px;
+}
+
+.tab-pane {
+    display: none;
+    font-size: 12px;
+    line-height: 1.6;
+    color: var(--color-text-secondary);
+    animation: tabFadeIn 0.3s ease-out forwards;
+}
+
+.tab-pane.active {
+    display: block;
+}
+
+@keyframes tabFadeIn {
+    from { opacity: 0; transform: translateY(4px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/* Tech Tags List */
+.tech-tags-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+}
+
+.tech-tag {
+    background: rgba(0, 242, 254, 0.04);
+    border: 1px solid rgba(0, 242, 254, 0.15);
+    color: var(--color-neon-cyan);
+    font-family: var(--font-mono);
+    font-size: 9.5px;
+    padding: 4px 10px;
+    border-radius: 4px;
+    transition: var(--transition-fast);
+}
+
+.tech-tag:hover {
+    background: rgba(0, 242, 254, 0.08);
+    border-color: var(--color-neon-cyan);
+    box-shadow: 0 0 8px rgba(0, 242, 254, 0.15);
+}
+
+/* Features List */
+.features-list {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.features-list li {
+    position: relative;
+    padding-left: 15px;
+}
+
+.features-list li::before {
+    content: '>';
+    font-family: var(--font-mono);
+    color: var(--color-neon-cyan);
+    position: absolute;
+    left: 0;
+    top: 0;
+}
+
+/* Action Buttons */
+.proj-actions {
+    display: flex;
+    gap: 12px;
+    margin-top: 8px;
+}
+
+.btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    font-family: var(--font-heading);
+    font-weight: 600;
+    font-size: 11px;
+    letter-spacing: 1.5px;
+    padding: 12px 22px;
+    border-radius: 8px;
+    text-decoration: none;
+    transition: var(--transition-fast);
+    position: relative;
+    overflow: hidden;
+}
+
+.btn-primary {
+    background: var(--color-neon-cyan);
+    color: var(--color-bg-deep);
+    border: 1px solid var(--color-neon-cyan);
+    box-shadow: 0 4px 15px rgba(0, 242, 254, 0.15);
+}
+
+.btn-primary .btn-glow {
+    position: absolute;
+    width: 50px;
+    height: 100%;
+    top: 0;
+    left: -60px;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.4), transparent);
+    transform: skewX(-20deg);
+}
+
+.btn-primary:hover .btn-glow {
+    animation: btnSlideGlow 1s ease-out;
+}
+
+@keyframes btnSlideGlow {
+    from { left: -60px; }
+    to { left: 110%; }
+}
+
+.btn-primary:hover {
+    box-shadow: 0 6px 20px rgba(0, 242, 254, 0.35);
+    transform: translateY(-1px);
+}
+
+.btn-secondary {
+    background: rgba(255, 255, 255, 0.02);
+    color: var(--color-text-primary);
+    border: 1px solid var(--color-border);
+}
+
+.btn-secondary:hover {
+    background: rgba(255, 255, 255, 0.05);
+    border-color: rgba(255, 255, 255, 0.2);
+    transform: translateY(-1px);
+}
+
+/* --------------------------------------------------------------------------
+   8. Core Tech Matrix Panel
+   -------------------------------------------------------------------------- */
+.skills-intro {
+    font-size: 12.5px;
+    line-height: 1.5;
+    color: var(--color-text-secondary);
+    margin-bottom: 20px;
+    font-weight: 300;
+}
+
+.skills-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 22px;
+}
+
+.skill-category h4 {
+    font-family: var(--font-heading);
+    font-size: 11.5px;
+    letter-spacing: 2px;
+    color: var(--color-text-primary);
+    margin-bottom: 12px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.skill-category h4 i {
+    color: var(--color-neon-magenta);
+}
+
+.skill-chips {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+}
+
+.skill-chip {
+    background: rgba(255, 255, 255, 0.015);
+    border: 1px solid var(--color-border);
+    color: var(--color-text-secondary);
+    font-family: var(--font-mono);
+    font-size: 9px;
+    padding: 5px 11px;
+    border-radius: 6px;
+    transition: var(--transition-fast);
+}
+
+.skill-chip:hover {
+    border-color: var(--color-neon-cyan);
+    color: var(--color-neon-cyan);
+    background: rgba(0, 242, 254, 0.02);
+}
+
+.skill-chip.highlight-tech {
+    background: rgba(0, 242, 254, 0.06);
+    border-color: var(--color-neon-cyan);
+    color: var(--color-neon-cyan);
+    box-shadow: 0 0 10px rgba(0, 242, 254, 0.15);
+    transform: scale(1.03);
+}
+
+/* --------------------------------------------------------------------------
+   9. Encrypted Contact Terminal Panel
+   -------------------------------------------------------------------------- */
+.terminal-form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.form-row {
+    display: flex;
+    align-items: center;
+    border: 1px solid var(--color-border);
+    background: rgba(0, 0, 0, 0.15);
+    border-radius: 8px;
+    padding: 10px 15px;
+    gap: 15px;
+    transition: border-color 0.3s, box-shadow 0.3s;
+}
+
+.form-row:focus-within {
+    border-color: var(--color-neon-cyan);
+    box-shadow: 0 0 8px var(--color-neon-cyan-glow);
+}
+
+.form-row label {
+    font-family: var(--font-mono);
+    font-size: 10px;
+    color: var(--color-neon-cyan);
+    white-space: nowrap;
+    text-shadow: 0 0 4px var(--color-neon-cyan-glow);
+}
+
+.form-row input,
+.form-row textarea {
+    background: none;
+    border: none;
+    outline: none;
+    color: var(--color-text-primary);
+    font-family: var(--font-mono);
+    font-size: 11px;
+    width: 100%;
+}
+
+.form-row input::placeholder,
+.form-row textarea::placeholder {
+    color: var(--color-text-muted);
+}
+
+.message-row {
+    align-items: flex-start;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.form-row textarea {
+    height: 100px;
+    resize: none;
+}
+
+.btn-submit {
+    width: 100%;
+    font-family: var(--font-heading);
+}
+
+.form-status {
+    font-family: var(--font-mono);
+    font-size: 10px;
+    margin-top: 10px;
+    min-height: 15px;
+}
+
+.form-status.success {
+    color: var(--color-neon-cyan);
+}
+
+.form-status.error {
+    color: var(--color-neon-magenta);
+}
+
+/* Pane Footer */
+.pane-footer {
+    margin-top: auto;
+    border-top: 1px solid var(--color-border);
+    padding-top: 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.footer-copy {
+    font-family: var(--font-mono);
+    font-size: 9px;
+    color: var(--color-text-muted);
+    letter-spacing: 1px;
+}
+
+.social-links {
+    display: flex;
+    gap: 15px;
+}
+
+.social-links a {
+    color: var(--color-text-muted);
+    font-size: 14px;
+    transition: var(--transition-fast);
+    text-decoration: none;
+}
+
+.social-links a:hover {
+    color: var(--color-neon-cyan);
+    transform: translateY(-2px);
+    text-shadow: 0 0 8px var(--color-neon-cyan-glow);
+}
+
+/* --------------------------------------------------------------------------
+   10. Right Pane: 3D Visual Arena
+   -------------------------------------------------------------------------- */
+.right-pane {
+    width: 58%;
+    height: 100%;
+    position: relative;
+    background-color: rgba(3, 3, 7, 0.2);
+    overflow: visible;
+}
+
+/* DNA Canvas Container */
+.dna-container {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+    pointer-events: none;
+}
+
+#dnaCanvas {
+    width: 100%;
+    height: 100%;
+    display: block;
+    pointer-events: none;
+}
+
+/* 3D Orbit Stages */
+.orbit-stage-viewport {
+    position: absolute;
+    inset: 0;
+    z-index: 5;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    perspective: 1500px;
+    transform-style: preserve-3d;
+    pointer-events: none;
+}
+
+.orbit-stage-3d {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transform-style: preserve-3d;
+}
+
+/* --------------------------------------------------------------------------
+   11. The Glare Card (Aceternity & Uiverse Inspired)
+   -------------------------------------------------------------------------- */
+.project-card {
+    position: absolute;
+    width: 320px;
+    height: 440px;
+    border-radius: 20px;
+    background: var(--color-bg-card);
+    backdrop-filter: blur(20px) saturate(180%);
+    -webkit-backdrop-filter: blur(20px) saturate(180%);
+    border: 1px solid var(--color-border);
+    transition: border-color 0.3s, opacity 0.5s ease;
+    transform-style: preserve-3d;
+    overflow: hidden;
+    pointer-events: auto;
+    user-select: none;
+    opacity: 0.25;
+    z-index: 10;
+}
+
+/* Ambient bottom shadow and neon color borders */
+.project-card::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: 20px;
+    padding: 1.5px;
+    background: linear-gradient(
+        135deg, 
+        rgba(255, 255, 255, 0.12) 0%, 
+        rgba(255, 255, 255, 0.02) 50%, 
+        rgba(255, 255, 255, 0.08) 100%
+    );
+    -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+    -webkit-mask-composite: xor;
+    mask-composite: exclude;
+    pointer-events: none;
+    z-index: 2;
+}
+
+/* Card Glow Border Overlay (Spotlight effect) */
+.card-glow-border {
+    position: absolute;
+    inset: -1px;
+    border-radius: 20px;
+    background: radial-gradient(
+        circle 180px at var(--mouse-x, 0) var(--mouse-y, 0),
+        rgba(0, 242, 254, 0.3) 0%,
+        rgba(243, 85, 218, 0.1) 40%,
+        transparent 80%
+    );
+    z-index: 0;
+    opacity: 0;
+    transition: opacity 0.4s;
+    pointer-events: none;
+}
+
+.project-card:hover .card-glow-border {
+    opacity: 1;
+}
+
+/* Glare Layer (Aceternity style reflection) */
+.glare-overlay {
+    position: absolute;
+    inset: 0;
+    z-index: 3;
+    pointer-events: none;
+    opacity: 0;
+    transition: opacity 0.3s;
+    background: radial-gradient(
+        circle 220px at var(--mouse-x, 0) var(--mouse-y, 0),
+        rgba(255, 255, 255, 0.1) 0%,
+        transparent 80%
+    );
+}
+
+.glare-overlay::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+        105deg,
+        rgba(0, 242, 254, 0.03) 0%,
+        rgba(243, 85, 218, 0.03) 25%,
+        rgba(79, 172, 254, 0.03) 50%,
+        rgba(255, 255, 255, 0.05) 100%
+    );
+    mix-blend-mode: color-dodge;
+    opacity: 0.6;
+}
+
+.project-card:hover .glare-overlay {
+    opacity: 1;
+}
+
+/* Active State of Orbit Card */
+.project-card.active {
+    opacity: 1;
+    border-color: rgba(0, 242, 254, 0.25);
+    box-shadow: 
+        0 15px 35px rgba(0, 0, 0, 0.4),
+        0 0 30px rgba(0, 242, 254, 0.08);
+    z-index: 30;
+}
+
+.project-card.active::before {
+    background: linear-gradient(
+        135deg, 
+        var(--color-neon-cyan) 0%, 
+        rgba(255, 255, 255, 0.02) 50%, 
+        var(--color-neon-magenta) 100%
+    );
+    padding: 1.5px;
+}
+
+/* Inner Content Layout */
+.card-content {
+    position: relative;
+    z-index: 5;
+    padding: 28px;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+    transform: translateZ(30px); /* Generates stunning 3D displacement! */
+}
+
+.card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.proj-num {
+    font-family: var(--font-mono);
+    font-size: 16px;
+    font-weight: 700;
+    color: rgba(255, 255, 255, 0.15);
+    transition: color 0.3s;
+}
+
+.project-card.active .proj-num {
+    color: var(--color-neon-cyan);
+    text-shadow: 0 0 10px var(--color-neon-cyan-glow);
+}
+
+.proj-badge {
+    font-family: var(--font-mono);
+    font-size: 8px;
+    letter-spacing: 1px;
+    color: var(--color-text-secondary);
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid var(--color-border);
+    padding: 4px 10px;
+    border-radius: 20px;
+}
+
+.project-card.active .proj-badge {
+    color: var(--color-neon-cyan);
+    border-color: rgba(0, 242, 254, 0.2);
+}
+
+/* Card Visual Vector Canvas */
+.card-visual {
+    height: 130px;
+    background: rgba(0, 0, 0, 0.2);
+    border: 1px solid rgba(255, 255, 255, 0.02);
+    border-radius: 12px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    overflow: hidden;
+}
+
+.card-visual::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-image: 
+        radial-gradient(rgba(255, 255, 255, 0.015) 1px, transparent 1px);
+    background-size: 10px 10px;
+}
+
+.card-svg {
+    width: 75px;
+    height: 75px;
+    filter: drop-shadow(0 0 8px rgba(0, 242, 254, 0.15));
+    transition: transform 0.5s ease;
+}
+
+.project-card:hover .card-svg {
+    transform: rotate(5deg) scale(1.05);
+}
+
+.svg-glow-dot {
+    animation: svgDotPulse 2s infinite alternate ease-in-out;
+}
+
+@keyframes svgDotPulse {
+    from { opacity: 0.4; filter: drop-shadow(0 0 1px currentColor); }
+    to { opacity: 1; filter: drop-shadow(0 0 8px currentColor); }
+}
+
+.card-title {
+    font-family: var(--font-heading);
+    font-size: 20px;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+    color: var(--color-text-primary);
+    transition: color 0.3s;
+}
+
+.project-card.active .card-title {
+    background: linear-gradient(135deg, #fff, #b2f5ff);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.card-tagline {
+    font-size: 11.5px;
+    line-height: 1.5;
+    color: var(--color-text-secondary);
+    font-weight: 300;
+}
+
+.card-footer {
+    margin-top: auto;
+    border-top: 1px solid rgba(255, 255, 255, 0.04);
+    padding-top: 15px;
+}
+
+.card-action {
+    font-family: var(--font-heading);
+    font-weight: 600;
+    font-size: 10px;
+    letter-spacing: 1px;
+    color: var(--color-text-muted);
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    transition: color 0.3s, gap 0.3s;
+}
+
+.project-card:hover .card-action {
+    color: var(--color-neon-cyan);
+    gap: 12px;
+}
+
+/* --------------------------------------------------------------------------
+   12. Navigation Dot Indicators (Right Edge)
+   -------------------------------------------------------------------------- */
+.scroll-navigation {
+    position: absolute;
+    right: 40px;
+    top: 50%;
+    transform: translateY(-50%);
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    z-index: 100;
+    pointer-events: auto;
+}
+
+.nav-dot {
+    width: 6px;
+    height: 25px;
+    background-color: rgba(255, 255, 255, 0.1);
+    border-radius: 3px;
+    transition: width 0.3s, background-color 0.3s, box-shadow 0.3s;
+    position: relative;
+}
+
+.nav-dot.active {
+    background-color: var(--color-neon-cyan);
+    box-shadow: 0 0 10px var(--color-neon-cyan-glow);
+    width: 8px;
+}
+
+.nav-dot:hover {
+    background-color: rgba(255, 255, 255, 0.4);
+}
+
+.dot-tooltip {
+    position: absolute;
+    right: 25px;
+    top: 50%;
+    transform: translateY(-50%) translateX(10px);
+    font-family: var(--font-mono);
+    font-size: 9px;
+    color: var(--color-text-primary);
+    background: rgba(5, 5, 10, 0.85);
+    border: 1px solid var(--color-border);
+    padding: 6px 12px;
+    border-radius: 6px;
+    white-space: nowrap;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s, transform 0.3s;
+    backdrop-filter: blur(4px);
+}
+
+.nav-dot:hover .dot-tooltip {
+    opacity: 1;
+    transform: translateY(-50%) translateX(0);
+}
+
+/* Scroll hint */
+.dna-rotation-hint {
+    position: absolute;
+    bottom: 40px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+    z-index: 20;
+    pointer-events: none;
+    animation: hintBounce 2.5s infinite ease-in-out;
+}
+
+@keyframes hintBounce {
+    0%, 100% { transform: translateX(-50%) translateY(0); opacity: 0.4; }
+    50% { transform: translateX(-50%) translateY(8px); opacity: 0.8; }
+}
+
+.hint-text {
+    font-family: var(--font-mono);
+    font-size: 8px;
+    letter-spacing: 2px;
+    color: var(--color-text-secondary);
+}
+
+.hint-arrow {
+    font-size: 11px;
+    color: var(--color-neon-cyan);
+}
+
+/* --------------------------------------------------------------------------
+   13. Fully Responsive Configurations & Device Layouts
+   -------------------------------------------------------------------------- */
+@media (max-width: 1200px) {
+    .left-pane-content {
+        padding: 40px 30px;
+        gap: 30px;
+    }
+    .dev-name {
+        font-size: 34px;
+    }
+    .project-card {
+        width: 280px;
+        height: 400px;
+        border-radius: 16px;
+    }
+    .card-content {
+        padding: 22px;
+    }
+    .card-visual {
+        height: 110px;
+    }
+}
+
+@media (max-width: 1023px) {
+    /* Stack Layout on Tablet and Mobile */
+    .portfolio-container {
+        position: relative;
+        flex-direction: column;
+        height: auto;
+        overflow-y: visible;
+    }
+    
+    .scroll-depth-spacer {
+        display: none; /* No deep scroll space needed on mobile stacks */
+    }
+
+    .left-pane {
+        width: 100%;
+        height: auto;
+        border-right: none;
+        border-bottom: 1px solid var(--color-border);
+        overflow-y: visible;
+    }
+
+    .left-pane-content {
+        padding: 50px 30px;
+    }
+
+    .right-pane {
+        width: 100%;
+        height: 700px;
+        background-color: var(--color-bg-dark);
+        border-top: 1px solid var(--color-border);
+    }
+
+    .dna-container {
+        height: 100%;
+    }
+
+    /* Transform mobile projects into a touch-friendly carousel */
+    .orbit-stage-viewport {
+        perspective: none;
+        transform-style: flat;
+        overflow-x: auto;
+        justify-content: flex-start;
+        padding: 0 30px;
+        scrollbar-width: thin;
+        pointer-events: auto;
+    }
+
+    .orbit-stage-3d {
+        transform-style: flat;
+        display: flex;
+        flex-direction: row;
+        gap: 20px;
+        align-items: center;
+        width: max-content;
+        height: 100%;
+    }
+
+    .project-card {
+        position: static !important;
+        transform: none !important;
+        opacity: 0.75 !important;
+        flex-shrink: 0;
+        width: 290px;
+        height: 410px;
+    }
+
+    .project-card.active {
+        opacity: 1 !important;
+        border-color: var(--color-neon-cyan);
+    }
+
+    .scroll-navigation {
+        display: none; /* Hidden on mobile */
+    }
+
+    .dna-rotation-hint {
+        bottom: 20px;
+    }
+
+    .hint-text {
+        content: "SWIPE PROJECTS HORIZONTALLY";
+    }
+}
+
+@media (max-width: 500px) {
+    .left-pane-content {
+        padding: 30px 20px;
+    }
+
+    .dev-name {
+        font-size: 28px;
+    }
+
+    .quick-stats {
+        grid-template-columns: 1fr;
+    }
+
+    .right-pane {
+        height: 600px;
+    }
+
+    .project-card {
+        width: 250px;
+        height: 360px;
+    }
+
+    .card-visual {
+        height: 90px;
+    }
+
+    .card-title {
+        font-size: 16px;
+    }
+}

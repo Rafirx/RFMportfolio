@@ -3,148 +3,452 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Rafi's Portfolio</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet" />
-    <link rel="stylesheet" href="styles.css">
+    <meta name="description" content="Rafiu Moynul - Portfolio. An interactive 3D DNA orbiting portfolio displaying cutting-edge full-stack and systems projects with glassmorphic glare designs.">
+    <title>Rafiu Moynul // Creative Systems Developer</title>
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500;700&family=Inter:wght@300;400;500;600;700&family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- FontAwesome Icons for High-End Accents -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Core Styling -->
+    <link rel="stylesheet" href="style.css">
 </head>
-<body>
-    <!-- Hero Section -->
-    <header>
-        <h1 class="glitch-title" data-text="RAFIU">RAFIU<br>PORTFOLIO</h1>
-        <p class="subtitle">Full-Stack Developer & Creative Technologist</p>
-        <p class="hero-hint">Say "down" or "up" to navigate ↓</p>
-    </header>
+<body class="loading">
+    <!-- Custom Interactive Spotlight Cursor -->
+    <div class="custom-cursor" id="customCursor"></div>
+    <div class="custom-cursor-glow" id="customCursorGlow"></div>
 
-    <!-- Skills Cards Section -->
-    <ul id="cards">
-        <li class="card">
-            <div class="card__content">
-                <span class="number">01</span>
-                <div class="card-inner">
-                    <h2 class="title">Frontend Development</h2>
-                    <p class="description">
-                        Crafting beautiful, interactive user interfaces with modern frameworks and responsive design principles.
+    <!-- Core Dynamic Background Elements -->
+    <div class="bg-matrix-grid"></div>
+    <div class="bg-glow bg-glow-cyan"></div>
+    <div class="bg-glow bg-glow-magenta"></div>
+    <div class="bg-dots"></div>
+
+    <!-- Loader Screen -->
+    <div class="loader-overlay" id="loaderOverlay">
+        <div class="loader-content">
+            <div class="loader-dna">
+                <span style="--i:1;"></span>
+                <span style="--i:2;"></span>
+                <span style="--i:3;"></span>
+                <span style="--i:4;"></span>
+                <span style="--i:5;"></span>
+                <span style="--i:6;"></span>
+                <span style="--i:7;"></span>
+                <span style="--i:8;"></span>
+            </div>
+            <div class="loader-text">INITIALIZING BIO-SYNAPTIC CORE</div>
+            <div class="loader-bar-container">
+                <div class="loader-bar" id="loaderBar"></div>
+            </div>
+            <div class="loader-percentage" id="loaderPercentage">0%</div>
+        </div>
+    </div>
+
+    <!-- Main Viewport Layer (Fixed Positioning for 3D Scroll Mechanics) -->
+    <main class="portfolio-container">
+        
+        <!-- Left Pane: Information Hub (Dashboard) -->
+        <section class="left-pane">
+            <div class="left-pane-content">
+                
+                <!-- Brand Header -->
+                <header class="brand-header">
+                    <div class="brand-logo">
+                        <span class="logo-symbol">//</span>
+                        <span class="logo-text">RAFIU.DEV</span>
+                    </div>
+                    <div class="system-status">
+                        <span class="status-dot"></span>
+                        <span class="status-label">SYSTEM ACTIVE</span>
+                        <span class="system-time" id="systemTime">12:00:00 UTC</span>
+                    </div>
+                </header>
+
+                <!-- Profile Section -->
+                <div class="profile-section">
+                    <h1 class="dev-name">Rafiu Moynul</h1>
+                    <h2 class="dev-title">Creative Systems Developer</h2>
+                    <p class="dev-bio">
+                        Engineering high-fidelity full-stack architectures and rich interactive graphics at the intersection of bio-systems and scalable digital infrastructure.
                     </p>
-                    <div class="icon-display"></div>
-                    <div class="feature-list">
-                        <span class="badge">React</span>
-                        <span class="badge">CSS3</span>
-                        <span class="badge">JavaScript</span>
-                        <span class="badge">Responsive</span>
+                    
+                    <!-- Quick Stats Dashboard -->
+                    <div class="quick-stats">
+                        <div class="stat-item">
+                            <span class="stat-val">5+</span>
+                            <span class="stat-lbl">Years Exp</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-val">99.8%</span>
+                            <span class="stat-lbl">Uptime</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-val">120K+</span>
+                            <span class="stat-lbl">Lines Code</span>
+                        </div>
                     </div>
                 </div>
-            </div>
-        </li>
 
-        <li class="card">
-            <div class="card__content">
-                <span class="number">02</span>
-                <div class="card-inner">
-                    <h2 class="title">Backend Development</h2>
-                    <p class="description">
-                        Building scalable server-side applications with robust APIs, databases, and microservices architecture.
-                    </p>
-                    <div class="icon-display"></div>
-                    <div class="feature-list">
-                        <span class="badge">Node.js</span>
-                        <span class="badge">Express</span>
-                        <span class="badge">MongoDB</span>
-                        <span class="badge">REST APIs</span>
+                <!-- Navigation Matrix Links -->
+                <nav class="nav-matrix">
+                    <a href="#projects" class="nav-item active" data-target="projects">
+                        <span class="nav-num">01 //</span> <span class="nav-txt">GENETIC ARCHIVES</span>
+                    </a>
+                    <a href="#skills" class="nav-item" data-target="skills">
+                        <span class="nav-num">02 //</span> <span class="nav-txt">TECH MATRIX</span>
+                    </a>
+                    <a href="#contact" class="nav-item" data-target="contact">
+                        <span class="nav-num">03 //</span> <span class="nav-txt">COMM CHANNEL</span>
+                    </a>
+                </nav>
+
+                <!-- Scroll Dependent Project Details Decryptor (Dynamic Panel) -->
+                <div class="decryptor-container" id="projects-panel">
+                    <div class="panel-header">
+                        <div class="panel-tag"><i class="fa-solid fa-microchip"></i> ARCHIVE DECRYPTOR</div>
+                        <div class="panel-id" id="activeProjectIndex">SECURE_INDEX // 01</div>
+                    </div>
+                    
+                    <div class="panel-body">
+                        <!-- Project Details Content (Transition-bound) -->
+                        <div class="project-details" id="projectDetails">
+                            <h3 class="proj-title" id="projTitle">AETHER // ENGINE</h3>
+                            <div class="proj-meta">
+                                <span class="proj-status" id="projStatus">STABLE v2.4.1</span>
+                                <span class="proj-latency" id="projLatency"><i class="fa-solid fa-gauge-high"></i> Render: 1.2ms</span>
+                            </div>
+                            
+                            <p class="proj-description" id="projDesc">
+                                A high-performance WebGL2 path-tracing GPU physics engine. Renders real-time dynamic soft-shadows, refraction, and volumetric light-scattering within active web viewports.
+                            </p>
+
+                            <!-- Interactive Specs Grid -->
+                            <div class="proj-specs">
+                                <div class="spec-card">
+                                    <div class="spec-label">GPU COMPUTE</div>
+                                    <div class="spec-val" id="specCompute">14.2 TFLOPs</div>
+                                </div>
+                                <div class="spec-card">
+                                    <div class="spec-label">MEMORY PROFILE</div>
+                                    <div class="spec-val" id="specMemory">34.8 MB</div>
+                                </div>
+                                <div class="spec-card">
+                                    <div class="spec-label">FPS DELTA</div>
+                                    <div class="spec-val" id="specFPS">120 FPS</div>
+                                </div>
+                            </div>
+
+                            <!-- Tabs Component -->
+                            <div class="proj-tabs">
+                                <div class="tab-headers">
+                                    <button class="tab-btn active" data-tab="architecture">ARCHITECTURE</button>
+                                    <button class="tab-btn" data-tab="tech">TECH STACK</button>
+                                    <button class="tab-btn" data-tab="features">FEATURES</button>
+                                </div>
+                                <div class="tab-contents">
+                                    <div class="tab-pane active" id="tab-architecture">
+                                        <p id="projArchText">GPGPU accelerated particle sorting using custom compute shaders, leveraging parallel matrix multiplication and Octree space subdivision.</p>
+                                    </div>
+                                    <div class="tab-pane" id="tab-tech">
+                                        <div class="tech-tags-list" id="projTechTags">
+                                            <span class="tech-tag">WebGL 2</span>
+                                            <span class="tech-tag">GLSL</span>
+                                            <span class="tech-tag">TypeScript</span>
+                                            <span class="tech-tag">WebAssembly</span>
+                                        </div>
+                                    </div>
+                                    <div class="tab-pane" id="tab-features">
+                                        <ul class="features-list" id="projFeatures">
+                                            <li>Real-time GPU collision detection with 100k+ particles.</li>
+                                            <li>Physically based glass refraction and path-traced glows.</li>
+                                            <li>Dynamic spatial hashing for spatial querying.</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Action Buttons -->
+                            <div class="proj-actions">
+                                <a href="#" class="btn btn-primary" id="projLiveLink" target="_blank">
+                                    <span class="btn-glow"></span>
+                                    <i class="fa-solid fa-bolt"></i> RUN SIMULATION
+                                </a>
+                                <a href="#" class="btn btn-secondary" id="projRepoLink" target="_blank">
+                                    <i class="fa-brands fa-github"></i> DECRYPT REPO
+                                </a>
+                            </div>
+                        </div>
                     </div>
                 </div>
-            </div>
-        </li>
 
-        <li class="card">
-            <div class="card__content">
-                <span class="number">03</span>
-                <div class="card-inner">
-                    <h2 class="title">UI/UX Design</h2>
-                    <p class="description">
-                        Designing intuitive user experiences with focus on accessibility, usability, and visual excellence.
-                    </p>
-                    <div class="icon-display"></div>
-                    <div class="feature-list">
-                        <span class="badge">Figma</span>
-                        <span class="badge">Design Systems</span>
-                        <span class="badge">Accessibility</span>
-                        <span class="badge">Prototyping</span>
+                <!-- Skill Matrix Pane -->
+                <div class="skills-container hide-panel" id="skills-panel">
+                    <div class="panel-header">
+                        <div class="panel-tag"><i class="fa-solid fa-cubes"></i> CORE TECH MATRIX</div>
+                        <div class="panel-id">SYS_CORE // MATRIX</div>
+                    </div>
+                    <div class="panel-body">
+                        <p class="skills-intro">Hovering active projects will highlight their specific nodes in the core developer matrix below.</p>
+                        
+                        <div class="skills-grid">
+                            <!-- Skill Category: Frontend -->
+                            <div class="skill-category">
+                                <h4><i class="fa-solid fa-code"></i> GRAPHICS & FRONTEND</h4>
+                                <div class="skill-chips">
+                                    <span class="skill-chip" data-skill="webgl">WebGL / WebGPU</span>
+                                    <span class="skill-chip" data-skill="threejs">Three.js</span>
+                                    <span class="skill-chip" data-skill="glsl">GLSL Shaders</span>
+                                    <span class="skill-chip" data-skill="typescript">TypeScript</span>
+                                    <span class="skill-chip" data-skill="react">React / Next.js</span>
+                                    <span class="skill-chip" data-skill="canvas">HTML5 Canvas</span>
+                                </div>
+                            </div>
+                            
+                            <!-- Skill Category: Backend/Systems -->
+                            <div class="skill-category">
+                                <h4><i class="fa-solid fa-server"></i> SYSTEMS & BACKEND</h4>
+                                <div class="skill-chips">
+                                    <span class="skill-chip" data-skill="rust">Rust</span>
+                                    <span class="skill-chip" data-skill="cpp">C++</span>
+                                    <span class="skill-chip" data-skill="wasm">WebAssembly</span>
+                                    <span class="skill-chip" data-skill="node">Node.js / Go</span>
+                                    <span class="skill-chip" data-skill="graphql">GraphQL / APIs</span>
+                                    <span class="skill-chip" data-skill="webrtc">WebRTC / P2P</span>
+                                </div>
+                            </div>
+
+                            <!-- Skill Category: Architecture -->
+                            <div class="skill-category">
+                                <h4><i class="fa-solid fa-network-wired"></i> DATA & INFRASTRUCTURE</h4>
+                                <div class="skill-chips">
+                                    <span class="skill-chip" data-skill="postgresql">PostgreSQL</span>
+                                    <span class="skill-chip" data-skill="redis">Redis / Caching</span>
+                                    <span class="skill-chip" data-skill="docker">Docker</span>
+                                    <span class="skill-chip" data-skill="crdt">CRDTs / Sync</span>
+                                    <span class="skill-chip" data-skill="webaudio">Web Audio API</span>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
-            </div>
-        </li>
 
-        <li class="card">
-            <div class="card__content">
-                <span class="number">04</span>
-                <div class="card-inner">
-                    <h2 class="title">Performance & Optimization</h2>
-                    <p class="description">
-                        Optimizing web applications for speed, efficiency, and seamless user experiences across all devices.
-                    </p>
-                    <div class="icon-display"></div>
-                    <div class="feature-list">
-                        <span class="badge">Testing</span>
-                        <span class="badge">Optimization</span>
-                        <span class="badge">DevTools</span>
-                        <span class="badge">Performance</span>
+                <!-- Contact Terminal Form -->
+                <div class="contact-container hide-panel" id="contact-panel">
+                    <div class="panel-header">
+                        <div class="panel-tag"><i class="fa-solid fa-terminal"></i> ENCRYPTED COMM CHANNEL</div>
+                        <div class="panel-id">COM_SECURE // ESTABLISHED</div>
+                    </div>
+                    <div class="panel-body">
+                        <form class="terminal-form" id="contactForm">
+                            <div class="form-row">
+                                <label for="senderName">> SENDER_ID:</label>
+                                <input type="text" id="senderName" required placeholder="IDENTIFIER / COMPANY NAME">
+                            </div>
+                            <div class="form-row">
+                                <label for="senderEmail">> SENDER_EMAIL:</label>
+                                <input type="email" id="senderEmail" required placeholder="CONTACT_ADDR@GATEWAY.COM">
+                            </div>
+                            <div class="form-row message-row">
+                                <label for="senderMsg">> TRANSMISSION_DATA:</label>
+                                <textarea id="senderMsg" required placeholder="ENTER SECURE TRANSMISSION MEMO..."></textarea>
+                            </div>
+                            <div class="form-actions">
+                                <button type="submit" class="btn btn-primary btn-submit">
+                                    <span class="btn-glow"></span>
+                                    <i class="fa-solid fa-paper-plane"></i> TRANSMIT DATA
+                                </button>
+                            </div>
+                        </form>
+                        <div class="form-status" id="formStatus"></div>
                     </div>
                 </div>
-            </div>
-        </li>
 
-        <li class="card">
-            <div class="card__content">
-                <span class="number">05</span>
-                <div class="card-inner">
-                    <h2 class="title">Deployment & DevOps</h2>
-                    <p class="description">
-                        Managing application deployment, CI/CD pipelines, and cloud infrastructure for reliable production systems.
-                    </p>
-                    <div class="icon-display"></div>
-                    <div class="feature-list">
-                        <span class="badge">Git</span>
-                        <span class="badge">Vercel</span>
-                        <span class="badge">Docker</span>
-                        <span class="badge">CI/CD</span>
+                <!-- Footer Accents -->
+                <footer class="pane-footer">
+                    <span class="footer-copy">© 2026 RAFIU MOYNUL</span>
+                    <div class="social-links">
+                        <a href="https://github.com" target="_blank" title="GitHub"><i class="fa-brands fa-github"></i></a>
+                        <a href="https://linkedin.com" target="_blank" title="LinkedIn"><i class="fa-brands fa-linkedin-in"></i></a>
+                        <a href="mailto:contact@rafiu.dev" title="Email"><i class="fa-solid fa-envelope"></i></a>
                     </div>
+                </footer>
+
+            </div>
+        </section>
+
+        <!-- Right Pane: 3D Visualization Arena -->
+        <section class="right-pane">
+            <!-- DNA visualizer canvas -->
+            <div class="dna-container">
+                <canvas id="dnaCanvas"></canvas>
+            </div>
+
+            <!-- 3D Orbiting Stages of Project Cards -->
+            <div class="orbit-stage-viewport">
+                <div class="orbit-stage-3d" id="orbitStage">
+                    
+                    <!-- Project Card 1 -->
+                    <article class="project-card glare-card active" data-index="0">
+                        <div class="glare-overlay"></div>
+                        <div class="card-glow-border"></div>
+                        <div class="card-content">
+                            <div class="card-header">
+                                <span class="proj-num">01</span>
+                                <span class="proj-badge"><i class="fa-solid fa-network-wired"></i> GPU COMPUTE</span>
+                            </div>
+                            <div class="card-visual">
+                                <svg class="card-svg" viewBox="0 0 100 100">
+                                    <circle cx="50" cy="50" r="35" stroke="rgba(0, 242, 254, 0.2)" stroke-width="1.5" fill="none"/>
+                                    <circle cx="50" cy="50" r="20" stroke="rgba(0, 242, 254, 0.4)" stroke-width="1" fill="none"/>
+                                    <path d="M 50 15 L 50 85 M 15 50 L 85 50 M 25 25 L 75 75 M 25 75 L 75 25" stroke="rgba(0, 242, 254, 0.3)" stroke-width="1"/>
+                                    <circle cx="50" cy="50" r="6" fill="#00f2fe" class="svg-glow-dot"/>
+                                </svg>
+                            </div>
+                            <h3 class="card-title">AETHER // ENGINE</h3>
+                            <p class="card-tagline">WebGL2 path-tracing engine drawing real-time interactive dynamics.</p>
+                            <div class="card-footer">
+                                <span class="card-action">DECRYPT CORE <i class="fa-solid fa-arrow-right-long"></i></span>
+                            </div>
+                        </div>
+                    </article>
+
+                    <!-- Project Card 2 -->
+                    <article class="project-card glare-card" data-index="1">
+                        <div class="glare-overlay"></div>
+                        <div class="card-glow-border"></div>
+                        <div class="card-content">
+                            <div class="card-header">
+                                <span class="proj-num">02</span>
+                                <span class="proj-badge"><i class="fa-solid fa-brain"></i> AI CORE</span>
+                            </div>
+                            <div class="card-visual">
+                                <svg class="card-svg" viewBox="0 0 100 100">
+                                    <rect x="25" y="25" width="50" height="50" rx="10" stroke="rgba(243, 85, 218, 0.2)" stroke-width="1.5" fill="none"/>
+                                    <circle cx="50" cy="50" r="15" stroke="rgba(243, 85, 218, 0.4)" stroke-width="1" fill="none"/>
+                                    <line x1="10" y1="50" x2="25" y2="50" stroke="rgba(243, 85, 218, 0.3)" stroke-width="1.5"/>
+                                    <line x1="75" y1="50" x2="90" y2="50" stroke="rgba(243, 85, 218, 0.3)" stroke-width="1.5"/>
+                                    <line x1="50" y1="10" x2="50" y2="25" stroke="rgba(243, 85, 218, 0.3)" stroke-width="1.5"/>
+                                    <line x1="50" y1="75" x2="50" y2="90" stroke="rgba(243, 85, 218, 0.3)" stroke-width="1.5"/>
+                                    <circle cx="50" cy="50" r="5" fill="#f355da" class="svg-glow-dot"/>
+                                </svg>
+                            </div>
+                            <h3 class="card-title">COGNITIVE // OS</h3>
+                            <p class="card-tagline">Web-based virtual sandbox running localized neural reasoning nodes.</p>
+                            <div class="card-footer">
+                                <span class="card-action">DECRYPT CORE <i class="fa-solid fa-arrow-right-long"></i></span>
+                            </div>
+                        </div>
+                    </article>
+
+                    <!-- Project Card 3 -->
+                    <article class="project-card glare-card" data-index="2">
+                        <div class="glare-overlay"></div>
+                        <div class="card-glow-border"></div>
+                        <div class="card-content">
+                            <div class="card-header">
+                                <span class="proj-num">03</span>
+                                <span class="proj-badge"><i class="fa-solid fa-dna"></i> BIO-SYSTEMS</span>
+                            </div>
+                            <div class="card-visual">
+                                <svg class="card-svg" viewBox="0 0 100 100">
+                                    <path d="M20 50 Q35 20, 50 50 T80 50" stroke="rgba(0, 242, 254, 0.3)" stroke-width="1.5" fill="none"/>
+                                    <path d="M20 50 Q35 80, 50 50 T80 50" stroke="rgba(243, 85, 218, 0.3)" stroke-width="1.5" fill="none"/>
+                                    <line x1="35" y1="35" x2="35" y2="65" stroke="rgba(255,255,255,0.2)" stroke-width="1"/>
+                                    <line x1="50" y1="50" x2="50" y2="50" stroke="rgba(255,255,255,0.2)" stroke-width="1"/>
+                                    <line x1="65" y1="35" x2="65" y2="65" stroke="rgba(255,255,255,0.2)" stroke-width="1"/>
+                                    <circle cx="35" cy="35" r="4" fill="#00f2fe"/>
+                                    <circle cx="35" cy="65" r="4" fill="#f355da"/>
+                                    <circle cx="65" cy="35" r="4" fill="#f355da"/>
+                                    <circle cx="65" cy="65" r="4" fill="#00f2fe"/>
+                                </svg>
+                            </div>
+                            <h3 class="card-title">BIOSYNTH // DNA</h3>
+                            <p class="card-tagline">Synthesizing sequences into procedural microtonal audio landscapes.</p>
+                            <div class="card-footer">
+                                <span class="card-action">DECRYPT CORE <i class="fa-solid fa-arrow-right-long"></i></span>
+                            </div>
+                        </div>
+                    </article>
+
+                    <!-- Project Card 4 -->
+                    <article class="project-card glare-card" data-index="3">
+                        <div class="glare-overlay"></div>
+                        <div class="card-glow-border"></div>
+                        <div class="card-content">
+                            <div class="card-header">
+                                <span class="proj-num">04</span>
+                                <span class="proj-badge"><i class="fa-solid fa-database"></i> DATABASES</span>
+                            </div>
+                            <div class="card-visual">
+                                <svg class="card-svg" viewBox="0 0 100 100">
+                                    <polygon points="50,15 80,35 80,65 50,85 20,65 20,35" stroke="rgba(243, 85, 218, 0.2)" stroke-width="1.5" fill="none"/>
+                                    <polygon points="50,25 70,40 70,60 50,75 30,60 30,40" stroke="rgba(0, 242, 254, 0.3)" stroke-width="1" fill="none"/>
+                                    <line x1="50" y1="15" x2="50" y2="85" stroke="rgba(255,255,255,0.15)" stroke-width="1"/>
+                                    <circle cx="50" cy="50" r="5" fill="#f355da" class="svg-glow-dot"/>
+                                </svg>
+                            </div>
+                            <h3 class="card-title">HELIOS // PROTOCOL</h3>
+                            <p class="card-tagline">Decentralized P2P CRDT sync engine maintaining absolute network consensus.</p>
+                            <div class="card-footer">
+                                <span class="card-action">DECRYPT CORE <i class="fa-solid fa-arrow-right-long"></i></span>
+                            </div>
+                        </div>
+                    </article>
+
+                    <!-- Project Card 5 -->
+                    <article class="project-card glare-card" data-index="4">
+                        <div class="glare-overlay"></div>
+                        <div class="card-glow-border"></div>
+                        <div class="card-content">
+                            <div class="card-header">
+                                <span class="proj-num">05</span>
+                                <span class="proj-badge"><i class="fa-solid fa-atom"></i> PHYSICS</span>
+                            </div>
+                            <div class="card-visual">
+                                <svg class="card-svg" viewBox="0 0 100 100">
+                                    <ellipse cx="50" cy="50" rx="35" ry="12" stroke="rgba(0, 242, 254, 0.3)" stroke-width="1" fill="none" transform="rotate(30 50 50)"/>
+                                    <ellipse cx="50" cy="50" rx="35" ry="12" stroke="rgba(243, 85, 218, 0.3)" stroke-width="1" fill="none" transform="rotate(-30 50 50)"/>
+                                    <ellipse cx="50" cy="50" rx="35" ry="12" stroke="rgba(255, 255, 255, 0.15)" stroke-width="1" fill="none" transform="rotate(90 50 50)"/>
+                                    <circle cx="50" cy="50" r="6" fill="#00f2fe" class="svg-glow-dot"/>
+                                </svg>
+                            </div>
+                            <h3 class="card-title">QUANTUM // SANDBOX</h3>
+                            <p class="card-tagline">Visual quantum circuit simulator plotting dynamic real-time probabilities.</p>
+                            <div class="card-footer">
+                                <span class="card-action">DECRYPT CORE <i class="fa-solid fa-arrow-right-long"></i></span>
+                            </div>
+                        </div>
+                    </article>
+
                 </div>
             </div>
-        </li>
 
-        <li class="card">
-            <div class="card__content">
-                <span class="number">06</span>
-                <div class="card-inner">
-                    <h2 class="title">Voice & AI Integration</h2>
-                    <p class="description">
-                        Implementing cutting-edge voice recognition, AI integration, and innovative user interactions.
-                    </p>
-                    <div class="icon-display"></div>
-                    <div class="feature-list">
-                        <span class="badge">Annyang</span>
-                        <span class="badge">Web APIs</span>
-                        <span class="badge">Innovation</span>
-                        <span class="badge">AI Integration</span>
-                    </div>
-                </div>
+            <!-- Scroll Navigation Indicators & Orbit Progress -->
+            <div class="scroll-navigation">
+                <div class="nav-dot active" data-index="0"><span class="dot-tooltip">01 Aether Engine</span></div>
+                <div class="nav-dot" data-index="1"><span class="dot-tooltip">02 Cognitive OS</span></div>
+                <div class="nav-dot" data-index="2"><span class="dot-tooltip">03 BioSynth DNA</span></div>
+                <div class="nav-dot" data-index="3"><span class="dot-tooltip">04 Helios Protocol</span></div>
+                <div class="nav-dot" data-index="4"><span class="dot-tooltip">05 Quantum Sandbox</span></div>
             </div>
-        </li>
-    </ul>
+            
+            <div class="dna-rotation-hint">
+                <span class="hint-text">SCROLL ORBIT TO ROTATE DNA ARCHIVES</span>
+                <i class="fa-solid fa-chevron-down hint-arrow"></i>
+            </div>
+        </section>
+        
+    </main>
 
-    <!-- Progress Circle -->
-    <svg class="progress-circle" viewBox="0 0 100 100">
-        <circle cx="50" cy="50" r="40" />
-    </svg>
+    <!-- Scroll Depth Spacer (Enables normal scrolling to drive visual timeline animations) -->
+    <div class="scroll-depth-spacer"></div>
 
-    <!-- Footer -->
-    <header class="footer-header">
-        <h1 class="glitch-title" data-text="LET'S BUILD">LET'S<br>BUILD<br>TOGETHER</h1>
-    </header>
-
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/annyang/2.6.1/annyang.min.js"></script>
+    <!-- Core Logic -->
     <script src="script.js"></script>
 </body>
 </html>
