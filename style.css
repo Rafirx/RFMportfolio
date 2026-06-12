@@ -1051,10 +1051,11 @@ body.hovering-clickable .custom-cursor-glow {
 /* --------------------------------------------------------------------------
    11. The Glare Card (Aceternity & Uiverse Inspired)
    -------------------------------------------------------------------------- */
+
 .project-card {
     position: absolute;
-    width: 320px;
-    height: 440px;
+    width: 440px;
+    height: 280px;
     border-radius: 20px;
     background: var(--color-bg-card);
     backdrop-filter: blur(20px) saturate(180%);
@@ -1168,12 +1169,29 @@ body.hovering-clickable .custom-cursor-glow {
 .card-content {
     position: relative;
     z-index: 5;
-    padding: 28px;
+    padding: 22px;
+    height: 100%;
+    display: flex;
+    flex-direction: row;
+    gap: 20px;
+    align-items: center;
+    transform: translateZ(30px); /* Generates stunning 3D displacement! */
+}
+
+/* Landscape grid segments */
+.card-left {
+    flex: 1.1;
+    height: 100%;
+    display: flex;
+    align-items: center;
+}
+
+.card-right {
+    flex: 1.4;
     height: 100%;
     display: flex;
     flex-direction: column;
-    gap: 18px;
-    transform: translateZ(30px); /* Generates stunning 3D displacement! */
+    justify-content: space-between;
 }
 
 .card-header {
@@ -1211,11 +1229,12 @@ body.hovering-clickable .custom-cursor-glow {
     border-color: rgba(0, 242, 254, 0.2);
 }
 
-/* Card Visual Vector Canvas */
+/* Card Visual Vector Canvas / Video Container */
 .card-visual {
-    height: 130px;
-    background: rgba(0, 0, 0, 0.2);
-    border: 1px solid rgba(255, 255, 255, 0.02);
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.3);
+    border: 1px solid rgba(255, 255, 255, 0.04);
     border-radius: 12px;
     display: flex;
     justify-content: center;
@@ -1231,31 +1250,163 @@ body.hovering-clickable .custom-cursor-glow {
     background-image: 
         radial-gradient(rgba(255, 255, 255, 0.015) 1px, transparent 1px);
     background-size: 10px 10px;
+    z-index: 1;
+    pointer-events: none;
 }
 
-.card-svg {
-    width: 75px;
-    height: 75px;
-    filter: drop-shadow(0 0 8px rgba(0, 242, 254, 0.15));
-    transition: transform 0.5s ease;
+/* Card Video style */
+/* ============================================================
+   Animated Themed Card Visuals (replacing broken Mixkit vids)
+   ============================================================ */
+
+/* Base animated container */
+.cv-anim {
+    width: 100%;
+    height: 100%;
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+    border-radius: 10px;
 }
 
-.project-card:hover .card-svg {
-    transform: rotate(5deg) scale(1.05);
+/* Floating orb spans shared */
+.cv-anim span {
+    position: absolute;
+    border-radius: 50%;
+    filter: blur(18px);
+    animation: cvOrb 5s ease-in-out infinite alternate;
 }
 
-.svg-glow-dot {
-    animation: svgDotPulse 2s infinite alternate ease-in-out;
+.cv-anim span:nth-child(1) { animation-delay: 0s; }
+.cv-anim span:nth-child(2) { animation-delay: -1.3s; }
+.cv-anim span:nth-child(3) { animation-delay: -2.6s; }
+.cv-anim span:nth-child(4) { animation-delay: -3.9s; }
+
+@keyframes cvOrb {
+    0%   { transform: translate(-20px, -20px) scale(1); }
+    100% { transform: translate(20px, 20px) scale(1.3); }
 }
 
-@keyframes svgDotPulse {
-    from { opacity: 0.4; filter: drop-shadow(0 0 1px currentColor); }
-    to { opacity: 1; filter: drop-shadow(0 0 8px currentColor); }
+/* Central icon */
+.cv-icon {
+    font-size: 36px;
+    position: relative;
+    z-index: 10;
+    filter: drop-shadow(0 0 14px rgba(255,255,255,0.4));
+    animation: cvIconPulse 3s ease-in-out infinite alternate;
+}
+
+@keyframes cvIconPulse {
+    from { transform: scale(0.92); opacity: 0.8; }
+    to   { transform: scale(1.08); opacity: 1; }
+}
+
+/* ---- Fuji Kitchen: warm amber-red gradient ---- */
+.card-visual--kitchen {
+    background: linear-gradient(135deg, #0d0408 0%, #1a0510 100%);
+}
+.cv-anim--kitchen span:nth-child(1) { width: 90px; height: 90px; top: 10%; left: 10%; background: rgba(220, 80, 30, 0.55); }
+.cv-anim--kitchen span:nth-child(2) { width: 70px; height: 70px; top: 50%; right: 5%;  background: rgba(255, 150, 50, 0.4);  }
+.cv-anim--kitchen span:nth-child(3) { width: 60px; height: 60px; bottom: 10%; left: 30%; background: rgba(200, 40, 10, 0.4); }
+.cv-anim--kitchen span:nth-child(4) { width: 80px; height: 80px; top: 20%; right: 30%; background: rgba(255, 100, 20, 0.3); }
+
+/* ---- Financeu: cool cyan-green finance ---- */
+.card-visual--finance {
+    background: linear-gradient(135deg, #030d0d 0%, #050f0a 100%);
+}
+.cv-anim--finance span:nth-child(1) { width: 90px; height: 90px; top: 5%;  left: 5%;  background: rgba(0, 220, 150, 0.45); }
+.cv-anim--finance span:nth-child(2) { width: 65px; height: 65px; top: 55%; right: 8%;  background: rgba(0, 180, 255, 0.35); }
+.cv-anim--finance span:nth-child(3) { width: 75px; height: 75px; bottom: 5%; left: 20%; background: rgba(0, 255, 180, 0.3); }
+.cv-anim--finance span:nth-child(4) { width: 50px; height: 50px; top: 30%; right: 25%; background: rgba(80, 230, 200, 0.3); }
+
+/* chart-lines animation overlay */
+.cv-anim--finance::before {
+    content: '';
+    position: absolute;
+    bottom: 20px;
+    left: 10px;
+    right: 10px;
+    height: 40px;
+    background: repeating-linear-gradient(
+        90deg,
+        transparent 0px,
+        transparent 6px,
+        rgba(0, 242, 180, 0.15) 6px,
+        rgba(0, 242, 180, 0.15) 7px
+    );
+    border-radius: 4px;
+    animation: chartSlide 3s ease-in-out infinite alternate;
+    pointer-events: none;
+    z-index: 5;
+}
+
+@keyframes chartSlide {
+    from { clip-path: inset(0 70% 0 0); }
+    to   { clip-path: inset(0 0% 0 0); }
+}
+
+/* ---- House Bakery: warm golden wheat tones ---- */
+.card-visual--bakery {
+    background: linear-gradient(135deg, #0d0a03 0%, #100d04 100%);
+}
+.cv-anim--bakery span:nth-child(1) { width: 95px; height: 95px; top: 5%;  left: 5%;  background: rgba(220, 170, 40, 0.5); }
+.cv-anim--bakery span:nth-child(2) { width: 70px; height: 70px; top: 50%; right: 5%;  background: rgba(200, 120, 30, 0.4); }
+.cv-anim--bakery span:nth-child(3) { width: 65px; height: 65px; bottom: 8%; left: 25%; background: rgba(240, 180, 50, 0.35); }
+.cv-anim--bakery span:nth-child(4) { width: 80px; height: 80px; top: 20%; right: 28%; background: rgba(210, 140, 20, 0.3); }
+
+/* steam wisps */
+.cv-anim--bakery::after {
+    content: '';
+    position: absolute;
+    bottom: 30%;
+    left: 50%;
+    width: 2px;
+    height: 25px;
+    background: linear-gradient(to top, rgba(255,220,120,0.5), transparent);
+    border-radius: 2px;
+    animation: steamRise 2.5s ease-in-out infinite;
+    pointer-events: none;
+    z-index: 5;
+}
+
+@keyframes steamRise {
+    0%   { transform: translateX(-50%) translateY(0) scaleX(1); opacity: 0.5; }
+    100% { transform: translateX(-50%) translateY(-25px) scaleX(2.5); opacity: 0; }
+}
+
+/* ---- Ouija Truthteller: deep purple-magenta mystical ---- */
+.card-visual--ouija {
+    background: linear-gradient(135deg, #05000d 0%, #0a0315 100%);
+}
+.cv-anim--ouija span:nth-child(1) { width: 100px; height: 100px; top: 5%;  left: 5%;  background: rgba(180, 0, 255, 0.35); }
+.cv-anim--ouija span:nth-child(2) { width: 70px;  height: 70px;  top: 55%; right: 5%;  background: rgba(243, 85, 218, 0.35); }
+.cv-anim--ouija span:nth-child(3) { width: 65px;  height: 65px;  bottom: 5%; left: 20%; background: rgba(100, 0, 200, 0.4); }
+.cv-anim--ouija span:nth-child(4) { width: 55px;  height: 55px;  top: 25%; right: 25%; background: rgba(220, 50, 255, 0.3); }
+
+/* pulsing sigil ring */
+.cv-anim--ouija::before {
+    content: '';
+    position: absolute;
+    width: 60px;
+    height: 60px;
+    border: 1.5px solid rgba(180, 0, 255, 0.4);
+    border-radius: 50%;
+    animation: ouijaPulse 2s ease-in-out infinite;
+    pointer-events: none;
+    z-index: 4;
+}
+
+@keyframes ouijaPulse {
+    0%   { transform: scale(0.8); opacity: 0.8; }
+    50%  { transform: scale(1.5); opacity: 0.2; }
+    100% { transform: scale(0.8); opacity: 0.8; }
 }
 
 .card-title {
     font-family: var(--font-heading);
-    font-size: 20px;
+    font-size: 18px;
     font-weight: 700;
     letter-spacing: 0.5px;
     color: var(--color-text-primary);
@@ -1269,16 +1420,15 @@ body.hovering-clickable .custom-cursor-glow {
 }
 
 .card-tagline {
-    font-size: 11.5px;
-    line-height: 1.5;
+    font-size: 11px;
+    line-height: 1.45;
     color: var(--color-text-secondary);
     font-weight: 300;
 }
 
 .card-footer {
-    margin-top: auto;
     border-top: 1px solid rgba(255, 255, 255, 0.04);
-    padding-top: 15px;
+    padding-top: 10px;
 }
 
 .card-action {
@@ -1400,15 +1550,13 @@ body.hovering-clickable .custom-cursor-glow {
         font-size: 34px;
     }
     .project-card {
-        width: 280px;
-        height: 400px;
+        width: 380px;
+        height: 250px;
         border-radius: 16px;
     }
     .card-content {
-        padding: 22px;
-    }
-    .card-visual {
-        height: 110px;
+        padding: 16px;
+        gap: 15px;
     }
 }
 
@@ -1474,8 +1622,25 @@ body.hovering-clickable .custom-cursor-glow {
         transform: none !important;
         opacity: 0.75 !important;
         flex-shrink: 0;
-        width: 290px;
-        height: 410px;
+        width: 320px;
+        height: 380px;
+    }
+
+    .card-content {
+        flex-direction: column !important;
+        gap: 15px !important;
+        padding: 20px !important;
+    }
+
+    .card-left {
+        width: 100% !important;
+        height: 160px !important;
+    }
+
+    .card-right {
+        width: 100% !important;
+        height: auto !important;
+        gap: 10px !important;
     }
 
     .project-card.active {
@@ -1514,12 +1679,12 @@ body.hovering-clickable .custom-cursor-glow {
     }
 
     .project-card {
-        width: 250px;
-        height: 360px;
+        width: 270px;
+        height: 340px;
     }
 
-    .card-visual {
-        height: 90px;
+    .card-left {
+        height: 130px !important;
     }
 
     .card-title {

@@ -10,99 +10,80 @@ document.addEventListener('DOMContentLoaded', () => {
     // ----------------------------------------------------------------------
     const projectData = [
         {
-            title: "AETHER // ENGINE",
-            status: "STABLE v2.4.1",
-            latency: "Render: 1.2ms",
-            desc: "A high-performance WebGL2 path-tracing GPU physics engine. Renders real-time dynamic soft-shadows, refraction, and volumetric light-scattering within active web viewports.",
-            compute: "14.2 TFLOPs",
-            memory: "34.8 MB",
-            fps: "120 FPS",
-            arch: "GPGPU accelerated particle sorting using custom compute shaders, leveraging parallel matrix multiplication and Octree space subdivision.",
-            tech: ["WebGL 2", "GLSL", "TypeScript", "WebAssembly", "Canvas"],
-            features: [
-                "Real-time GPU collision detection with 100k+ particles.",
-                "Physically based glass refraction and path-traced glows.",
-                "Dynamic spatial hashing for rapid neighborhood querying."
-            ],
-            live: "https://github.com",
-            repo: "https://github.com",
-            skillsToHighlight: ["webgl", "threejs", "glsl", "typescript", "wasm", "canvas"]
-        },
-        {
-            title: "COGNITIVE // OS",
-            status: "DEPLOYED v0.9.8",
-            latency: "Inference: 24ms",
-            desc: "An in-browser virtual UNIX-like desktop sandbox running micro-quantized AI reasoning engines locally. Fully sandboxed and operational offline with full filesystem mocks.",
-            compute: "0.8 TFLOPs",
-            memory: "185.2 MB",
+            title: "FUJI // KITCHEN",
+            status: "LIVE ARCHIVE",
+            latency: "Ping: 14ms",
+            desc: "A high-fidelity Japanese culinary web interface showcasing dynamic visual menus, interactive reservations, and rich atmospheric animations.",
+            compute: "N/A",
+            memory: "4.2 MB",
             fps: "60 FPS",
-            arch: "WebWorkers drive parallelized shell operations while a WebAssembly bundle executes quantized ONNX tensor graphs directly in the sandbox thread.",
-            tech: ["React", "TypeScript", "WebAssembly", "Node.js", "Docker"],
+            arch: "Single-page interactive application built with modular component mapping and highly optimized graphic layer rendering.",
+            tech: ["HTML5", "CSS3", "JavaScript", "Google Fonts", "GSAP"],
             features: [
-                "Fully operational virtual bash-terminal with virtual file structure.",
-                "Local NLP command parser running in-browser tensor runtimes.",
-                "Dynamic window management and desktop virtualization environment."
+                "Interactive visual menu items detailing ingredients.",
+                "Real-time online reservation ledger system.",
+                "Responsive, high-fidelity responsive layout designs."
             ],
-            live: "https://github.com",
-            repo: "https://github.com",
-            skillsToHighlight: ["typescript", "react", "wasm", "node", "docker"]
+            live: "https://rafirx.github.io/Fuji_Kitchen/",
+            repo: "https://github.com/rafirx/Fuji_Kitchen",
+            skillsToHighlight: ["typescript", "canvas", "react", "graphql"]
         },
         {
-            title: "BIOSYNTH // DNA",
-            status: "STABLE v1.1.2",
-            latency: "Audio Delta: 0.8ms",
-            desc: "A creative bio-informatics environment that parses genomic DNA strings (A, T, C, G) into procedural microtonal chord matrices and dynamic polyrhythmic synthesizers.",
-            compute: "2.1 TFLOPs",
-            memory: "12.4 MB",
-            fps: "90 FPS",
-            arch: "Genome maps translate into pitch oscillators via the Web Audio API. Nodes are spaced dynamically using frequency modulation matrices for high acoustic purity.",
-            tech: ["HTML5 Canvas", "TypeScript", "Web Audio API", "Rust", "WASM"],
-            features: [
-                "Live genomic sequencing parser importing raw FASTA file matrices.",
-                "Additive multi-oscillator polyphonic custom synth engine.",
-                "Real-time Canvas Fourier transform frequency spectrum visualizer."
-            ],
-            live: "https://github.com",
-            repo: "https://github.com",
-            skillsToHighlight: ["canvas", "typescript", "webaudio", "rust", "wasm"]
-        },
-        {
-            title: "HELIOS // PROTOCOL",
-            status: "STABLE v4.0.0",
-            latency: "Sync: 4.8ms",
-            desc: "A decentralized, peer-to-peer real-time collaborative database engine utilizing Conflict-free Replicated Data Types (CRDTs) to maintain consensus without centralized authorities.",
-            compute: "6.7 TFLOPs",
-            memory: "42.1 MB",
-            fps: "N/A",
-            arch: "P2P WebRTC data channels orchestrate distributed network maps, and state updates synchronize via Yjs and hybrid LWW (Last-Write-Wins-Element) CRDT matrices.",
-            tech: ["Rust", "WebRTC", "TypeScript", "CRDTs", "GraphQL"],
-            features: [
-                "Sub-10ms peer-to-peer transactional consensus synchronization.",
-                "Offline write capabilities with automated cryptographic conflict sorting.",
-                "Integrated multi-user active cursors and collaborative canvas grids."
-            ],
-            live: "https://github.com",
-            repo: "https://github.com",
-            skillsToHighlight: ["rust", "webrtc", "typescript", "crdt", "graphql"]
-        },
-        {
-            title: "QUANTUM // SANDBOX",
-            status: "ALPHA v0.2.0",
-            latency: "Solve: 8.5ms",
-            desc: "A drag-and-drop visual quantum circuit simulator plotting dynamic real-time probabilities, Bloch sphere state vectors, and complex number amplitudes.",
-            compute: "11.8 TFLOPs",
-            memory: "56.3 MB",
+            title: "FINANCEU",
+            status: "LIVE ARCHIVE",
+            latency: "Query: 8ms",
+            desc: "A personal finance tracking dashboard visualizing real-time assets, transaction histories, and budgets with responsive graphs.",
+            compute: "0.2 TFLOPs",
+            memory: "12.8 MB",
             fps: "60 FPS",
-            arch: "Quantum matrices (Hadamard, CNOT, Phase) execute on parallel threads. State probabilities calculate via tensor product mathematics compiled in Rust WASM.",
-            tech: ["React", "TypeScript", "Rust", "WebAssembly", "Three.js"],
+            arch: "Client-side state manager mapping transaction ledgers, coupled with dynamic SVG visualizer modules.",
+            tech: ["React", "TypeScript", "Chart.js", "TailwindCSS", "Node.js"],
             features: [
-                "Interactive multi-qubit visual circuit editor with drag-and-drop gates.",
-                "Bloch Sphere 3D projection rendering active state transformations.",
-                "WASM accelerated complex matrix solvers plotting quantum state paths."
+                "Interactive financial ledger and asset allocator.",
+                "Dynamic dashboard graphs showing historical spend summaries.",
+                "Highly responsive and clean banking interface design."
             ],
-            live: "https://github.com",
-            repo: "https://github.com",
-            skillsToHighlight: ["react", "typescript", "rust", "wasm", "threejs"]
+            live: "https://rafirx.github.io/Financeu/",
+            repo: "https://github.com/rafirx/Financeu",
+            skillsToHighlight: ["typescript", "react", "node", "postgresql"]
+        },
+        {
+            title: "HOUSE // BAKERY",
+            status: "LIVE ARCHIVE",
+            latency: "Load: 0.9s",
+            desc: "An artisan bakery landing page featuring daily schedule visualization, pastry catalogs, and interactive checkout systems.",
+            compute: "N/A",
+            memory: "2.1 MB",
+            fps: "60 FPS",
+            arch: "Lightweight modular frontend design optimized for sub-second page loads and responsive fluid layouts.",
+            tech: ["HTML5", "CSS3", "Vanilla JS", "Flexbox/Grid", "Framer Motion"],
+            features: [
+                "Artisan baking calendar and daily item visualizer.",
+                "Responsive pastry showcase carousel.",
+                "Dynamic shopping cart and pricing ledger system."
+            ],
+            live: "https://rafirx.github.io/house_bakery/",
+            repo: "https://github.com/rafirx/house_bakery",
+            skillsToHighlight: ["typescript", "canvas", "react", "crdt"]
+        },
+        {
+            title: "OUIJA // TRUTHTELLER",
+            status: "LIVE ARCHIVE",
+            latency: "Sync: 2ms",
+            desc: "A mystical digital ouija board game producing procedurally animated pointer tracks and spooky ambient sound synthesis.",
+            compute: "1.4 TFLOPs",
+            memory: "22.5 MB",
+            fps: "60 FPS",
+            arch: "Web Audio API generates creepy ambient synthetic frequencies, driven by mouse trajectory and hover triggers.",
+            tech: ["HTML5 Canvas", "Web Audio API", "CSS3 Animations", "Vanilla JS"],
+            features: [
+                "Interactive procedural cursor tracks dragging mystical planchette.",
+                "Multi-oscillator synthesized background audio generating spooky soundscapes.",
+                "Interactive text parser decryption engine giving mystical answers."
+            ],
+            live: "https://rafirx.github.io/ouija_truthteller/",
+            repo: "https://github.com/rafirx/ouija_truthteller",
+            skillsToHighlight: ["canvas", "webaudio", "rust", "wasm"]
         }
     ];
 
@@ -463,30 +444,31 @@ document.addEventListener('DOMContentLoaded', () => {
         updateOrbitTransitions(currentScrollRatio);
     }
 
+
     function updateOrbitTransitions(scrollRatio) {
         if (window.innerWidth < 1024) {
             return;
         }
 
-        // Cards span exactly 288 degrees (4/5ths of a circle) so that scrolling 0 to 100%
-        // aligns projects 1 to 5 perfectly with the active viewport panels
-        const baseOrbitAngle = scrollRatio * Math.PI * 2 * (4 / 5);
+        // Cards span exactly 270 degrees (3/4 of a circle) so that scrolling 0 to 100%
+        // aligns projects 1 to 4 perfectly with the active viewport panels
+        const baseOrbitAngle = scrollRatio * Math.PI * 2 * (3 / 4);
         
         let closestCardIdx = 0;
         let highestZ = -Infinity;
 
         projectCards.forEach((card, i) => {
-            // Spacing: 360 deg / 5 cards = 72 deg spacing (Math.PI * 2 / 5)
-            // Inverting baseOrbitAngle makes the rotation direction chronological (Card 1 -> 2 -> 3 -> 4 -> 5)
-            const cardAngle = -baseOrbitAngle + (i * Math.PI * 2 / 5);
+            // Spacing: 360 deg / 4 cards = 90 deg spacing (Math.PI * 2 / 4)
+            // Inverting baseOrbitAngle makes the rotation direction chronological (Card 1 -> 2 -> 3 -> 4)
+            const cardAngle = -baseOrbitAngle + (i * Math.PI * 2 / 4);
             
             // X & Z coordinates trace circular ring
             const x = Math.sin(cardAngle) * orbitRadius;
             const z = Math.cos(cardAngle) * orbitRadius;
             
             // Smoothly spiral the cards vertically, keeping the active card centered in the viewport
-            const spacingY = 120;
-            const y = (i - scrollRatio * 4) * spacingY;
+            const spacingY = 140;
+            const y = (i - scrollRatio * 3) * spacingY;
             
             // Keep card facing camera (Billboard Effect)
             const rotationY = -cardAngle * (180 / Math.PI);
@@ -780,8 +762,8 @@ document.addEventListener('DOMContentLoaded', () => {
     // Smooth scrolls window to precise project height
     function scrollToProject(index) {
         const scrollMax = document.documentElement.scrollHeight - window.innerHeight;
-        // Divide by 4 sectors (0 to 4 indexes)
-        const targetScroll = (index / 4) * scrollMax;
+        // Divide by 3 sectors (0 to 3 indexes)
+        const targetScroll = (index / 3) * scrollMax;
         
         window.scrollTo({
             top: targetScroll,
